@@ -13,10 +13,10 @@ const port = process.env.PORT;
 const server = http.createServer(app.callback());
 
 app
+  .use(bodyParser())
   .use(cors())
   .use(allRouter.routes())
   .use(allRouter.allowedMethods())
-  .use(bodyParser())
 
 server.listen(port, () => {
   console.log(` >>> port: ${port}`);
