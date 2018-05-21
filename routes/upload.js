@@ -6,8 +6,9 @@ const path = require('path');
 const { getType } = require('./mimes.js');
 
 const Upload = async (ctx, next) => {
-  // if (ctx.method !== 'POST') return await next();
+  if (ctx.method !== 'POST') return await next();
   let { file } = ctx.request.body.files;
+  console.log(ctx.request.body)
   if (!file.length) {
     file = [file];
   }
