@@ -13,6 +13,7 @@ const port = process.env.PORT;
 const server = http.createServer(app.callback());
 
 app
+  .use(cors())
   .use(allRouter.routes())
   .use(allRouter.allowedMethods())
   .use(bodyParser())
