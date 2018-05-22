@@ -12,7 +12,13 @@ const Graphql = async (ctx) => {
         'Content-Type': 'application/json',
       },
       data,
-    }).then(res => resolve(res.data),err => reject(err))
+    }).then(res => resolve({
+      code: 200,
+      data: res.data
+    }),err => reject({
+      code: 500,
+      data: err
+    }))
   });
   ctx.body = await queryFunc(query);
 };
