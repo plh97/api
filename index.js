@@ -12,6 +12,7 @@ const app = new Koa();
 const port = process.env.PORT;
 const server = http.createServer(app.callback());
 
+// core config
 app
   .use(bodyParser())
   .use(cors())

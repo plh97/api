@@ -15,3 +15,17 @@ axios.post('https://api.pipk.top/upload',{
 	err: 错误捕捉
 })
 ```
+
+
+### common auto set user && password
+```bash
+$ git config credential.helper store
+$ git push http://github.com/pengliheng/repo.git
+Username: <type your username>
+Password: <type your password>
+```
+
+Also I suggest you to read
+```
+$ git help credentials
+```
