@@ -3,7 +3,7 @@ const axios = require('axios');
 const Graphql = async (ctx) => {
   const query = ctx.request.body;
   const queryFunc = async data => new Promise((resolve, reject) => {
-    console.log(process.env.access_token, data)
+    // console.log(process.env.access_token, data)
     axios({
       url: 'https://api.github.com/graphql',
       method: 'post',
