@@ -15,10 +15,13 @@ const Graphql = async (ctx) => {
     }).then(res => resolve({
       code: 200,
       data: res.data
-    }),err => reject({
-      code: 500,
-      data: err
-    }))
+    }),err =>{
+      throw new Error(err);
+      reject({
+        code: 500,
+        data: err
+      })
+    })
   });
   ctx.body = await queryFunc(query);
 };
