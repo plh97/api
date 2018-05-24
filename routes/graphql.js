@@ -5,7 +5,8 @@ const Graphql = async (ctx) => {
   const queryFunc = async data => new Promise((resolve, reject) => {
     console.log(
       '是否相等',
-      cache[data]
+      cache[data],
+      data.slice(0,30)
     )
     if(cache[data]){
       console.log('get data from cache')
