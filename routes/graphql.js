@@ -22,15 +22,7 @@ const Graphql = async (ctx) => {
             code: 200,
             data: res.data.data,
           }
-          resolve({
-            code: 200,
-            data: res.data.data,
-          });
-        }, err => {
-          reject({
-            code: 500,
-            err
-          });
+          resolve(res.data.data);
         });
     }
   });
