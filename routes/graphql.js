@@ -48,7 +48,7 @@ const Graphql = async (ctx) => {
         data,
       })
         .then( res => {
-          cache.push({
+          cache.addCache({
             key: data,
             val: res.data
           });
