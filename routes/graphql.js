@@ -12,7 +12,7 @@ class Cache {
   addCache({key,val}){
     // 添加
     const isExist = this.getCache(key);
-    if(isExist.length>0){
+    if(isExist){
       // 如果有数组，那就直接返回它，
       return isExist
     } else {
