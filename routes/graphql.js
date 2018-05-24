@@ -3,11 +3,9 @@ global.cache = {}
 const Graphql = async (ctx) => {
   const query = ctx.request.body;
   const queryFunc = async data => new Promise((resolve, reject) => {
-    console.log(
-      '是否相等',
-      cache[data],
-      data.slice(0,30)
-    )
+    console.log('是否相等')
+    console.log(cache[data])
+    console.log(data.slice(0,30))
     if(cache[data]){
       console.log('get data from cache')
       resolve(cache[data]);
