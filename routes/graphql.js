@@ -1,5 +1,5 @@
 const axios = require('axios');
-const cache = {}
+global.cache = {}
 const Graphql = async (ctx) => {
   const query = ctx.request.body;
   const queryFunc = async data => new Promise((resolve, reject) => {
