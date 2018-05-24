@@ -18,10 +18,7 @@ const Graphql = async (ctx) => {
         data,
       })
         .then( res => {
-          cache[data] = {
-            code: 200,
-            data: res.data.data,
-          }
+          cache[data] = res.data.data,
           resolve(res.data.data);
         });
     }
