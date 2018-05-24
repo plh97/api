@@ -18,8 +18,8 @@ const Graphql = async (ctx) => {
         data,
       })
         .then( res => {
-          cache[data] = res.data.data,
-          resolve(res.data.data);
+          cache[data] = res.data,
+          resolve(res.data);
         });
     }
   });
