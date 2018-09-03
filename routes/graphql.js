@@ -32,6 +32,7 @@ const Graphql = async (ctx) => {
     console.log('是否相等')
     console.log(cache.getCache(data))
     console.log(data)
+    console.log(process.env.access_token)
     const isExist = cache.getCache(data);
     if(isExist){
       console.log('get data from cache')
