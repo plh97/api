@@ -9,7 +9,7 @@
 <body>
   234tr
   <script>
-    fetch('https://pipk.top/postcss',{
+    fetch('https://api.pipk.top/postcss',{
         method: 'post',
         credentials: 'include',
         body: {
@@ -18,8 +18,8 @@
           }`
         }
     }).then(res=>{
-      console.log(tes);
-      
+      console.log(res);
+      return res.json()
     })
     .then(res=>{
       console.log(res);
