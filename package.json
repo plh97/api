@@ -20,6 +20,7 @@
   "homepage": "https://github.com/pengliheng/api#readme",
   "dependencies": {
     "@koa/cors": "^2.2.1",
+    "autoprefixer": "^9.3.1",
     "axios": "^0.18.0",
     "fs-extra": "^6.0.1",
     "gulp-tiny": "^1.0.0",
@@ -30,7 +31,9 @@
     "koa-body": "^2.5.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "postcss": "^7.0.5",
+    "precss": "^3.1.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
