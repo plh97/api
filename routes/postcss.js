@@ -4,25 +4,21 @@ const postcss = require('postcss')
 const precss = require('precss')
 // local
 
-const PostCss = async (ctx, next) => {
-  if (ctx.method !== 'POST') return await next();
-  let { css } = ctx.request.body;
-  console.log(ctx.request.body)
-
-
-  const res = async () => new Promise(resolve=>{
-
+const pcss = async (ctx) => {
+  const css = ctx.request.body;
+  const res = async data => new Promise((resolve, reject) => {
     postcss([precss, autoprefixer])
-      .process(postcss.parse(css))
+      .process(postcss.parse(data))
       .then(res => {
-        console.log(res.css);
         resolve(res.css)
       })
   })
 
 
-  ctx.body = await res;
+  ctx.body ={
+    res:await res(css)
+  } 
 };
 
-module.exports = PostCss;
+module.exports = pcss;
 

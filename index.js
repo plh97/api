@@ -6,7 +6,7 @@ const url = require ('url');
 const path = require ('path');
 const mime = require ('./mime');
 const cors = require('@koa/cors');
-const bodyParser = require('koa-bodyparser');
+const bodyParser = require('koa-body-parser');
 
 // local
 const allRouter = require('./routes/index.js');
@@ -21,29 +21,25 @@ const server = http.createServer(app.callback());
 app
   .use(bodyParser())
   .use(cors())
-  .use( async ctx => {
-    let filePath = `.${ctx.request.url}`;
-    const resData = () => new Promise(res=>{
-      fs.stat(filePath,(err,stat)=>{
-        console.log(err,stat);
-        
-
-        fs.readdir(filePath,(err,files)=>{
-          let html = '';
-          console.log('222222222222',files);
-          files.forEach( function (file){
-            html += `
-            <h3>
-              <a href="${ctx.request.url}${file}">${file}</a>
-            </h3>
-            `;
-          });
-          res(html);
-        })
-      })
-    });
-    ctx.body = await resData()
-  })
+  // .use( async ctx => {
+  //   let filePath = `.${ctx.request.url}`;
+  //   const resData = () => new Promise(res=>{
+  //     fs.stat(filePath,(err,stat)=>{
+  //       fs.readdir(filePath,(err,files)=>{
+  //         let html = '';
+  //         files.forEach( function (file){
+  //           html += `
+  //           <h3>
+  //             <a href="${ctx.request.url}${file}">${file}</a>
+  //           </h3>
+  //           `;
+  //         });
+  //         res(html);
+  //       })
+  //     })
+  //   });
+  //   ctx.body = await resData()
+  // })
   .use(allRouter.routes())
   .use(allRouter.allowedMethods())
 
