@@ -14,10 +14,10 @@ const pcss = async (ctx) => {
       })
   })
 
-
-  ctx.body ={
-    res:await res(css)
-  } 
+  ctx.body = css
+  // ctx.body ={
+  //   res: await res(css)
+  // } 
 };
 
 module.exports = pcss;
