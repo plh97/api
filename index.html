@@ -7,25 +7,57 @@
   <title>Document</title>
 </head>
 <body>
-  234tr
+  <div id="root">
+    {{msg}}
+    {{css}}
+    <textarea name="" id="" :value="css" cols="30" rows="10" />
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type=text/javascript src=https://assets.vmei.com/libs/vue@2.5/vue.min.js></script>
   <script>
-    fetch('https://api.pipk.top/postcss',{
-    // fetch('http://127.0.0.1:8888/postcss',{
-        method: 'POST',
-        mode: 'no-cors', // 'cors' by default
-        credentials: 'include',
-        body: `{
-          user-select: none;
-        }`
-    }).then(res => {
-      console.log(res);
-      if(res){
-        res.json().then(re=>{
-          console.log(re);
-          
+    new Vue({
+      el: '#root',
+      data () {
+        return {
+          msg: '3423',
+          css: ''
+        }
+      },
+      mounted(){
+        axios({
+          method: 'post',
+          url: 'http://localhost:3001/postcss',
+          // url: 'https://api.pipk.top/postcss',
+          type: "json",
+          data: {
+            css: `{
+              user-select: none;
+            }`
+          }
+        }).then(res=>{
+          if(res.data.success){
+            this.css = res.data.data.css;
+            console.log(this.css);
+          }
         })
       }
     })
+    // fetch('https://api.pipk.top/postcss',{
+    //     method: 'POST',
+    //     mode: 'no-cors', // 'cors' by default
+    //     credentials: 'include',
+    //     body: `{
+    //       user-select: none;
+    //     }`
+    // }).then(res => {
+    //   console.log(res);
+    //   if(res){
+    //     res.json().then(re=>{
+    //       console.log(re);
+          
+    //     })
+    //   }
+    // })
   </script>
 </body>
 </html>
