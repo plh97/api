@@ -8,8 +8,11 @@ const pcss = require('./postcss.js');
 
 router
   .all('/upload', koaBody({ multipart: true }), Upload)
-  .post('/graphql', Graphql)
+  .all('/graphql', Graphql)
   .all('/postcss', pcss)
+  .all('/test', async ctx=>{
+    ctx.body = "234"
+  })
 
 
 module.exports = router;

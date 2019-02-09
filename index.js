@@ -1,49 +1,36 @@
 // package
 const Koa = require('koa');
 const http = require('http');
-const fs = require ('fs');
-const url = require ('url');
-const path = require ('path');
-const mime = require ('./mime');
-const cors = require('@koa/cors');
 const bodyParser = require('koa-body-parser');
-
 // local
 const allRouter = require('./routes/index.js');
-
 // application
 const app = new Koa();
-const port = 3001;
+const port = 3002;
 // const port = process.env.PORT;
 const server = http.createServer(app.callback());
 
 // core config
 app
   .use(bodyParser())
-  .use(cors())
-  // .use( async ctx => {
-  //   let filePath = `.${ctx.request.url}`;
-  //   const resData = () => new Promise(res=>{
-  //     fs.stat(filePath,(err,stat)=>{
-  //       fs.readdir(filePath,(err,files)=>{
-  //         let html = '';
-  //         files.forEach( function (file){
-  //           html += `
-  //           <h3>
-  //             <a href="${ctx.request.url}${file}">${file}</a>
-  //           </h3>
-  //           `;
-  //         });
-  //         res(html);
-  //       })
-  //     })
-  //   });
-  //   ctx.body = await resData()
-  // })
+  // 跨域中间件
+  .use(async (ctx,next) =>{
+    ctx.set('Access-Control-Allow-Origin', '*');
+
+    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, remember-me');
+    await next()
+  })
+  // 响应时间中间件
+  .use(async (ctx,next)=>{
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
+  })
   .use(allRouter.routes())
   .use(allRouter.allowedMethods())
 
 server.listen(port, () => {
   console.log(` >>> port: ${port}`);
-  console.log(` >>> ENV: ${process.env.NODE_ENV}`);
+  // console.log(` >>> ENV: ${JSON.stringify(process.env)}`);
 });
