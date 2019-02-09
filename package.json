@@ -4,6 +4,7 @@
   "description": "个人api制作",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "n": "nodemon index.js --config nodemonrc.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
