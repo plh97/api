@@ -6,8 +6,7 @@ const bodyParser = require('koa-body-parser');
 const allRouter = require('./routes/index.js');
 // application
 const app = new Koa();
-const port = 3001;
-// const port = process.env.PORT;
+const port = process.env.PORT;
 const server = http.createServer(app.callback());
 
 // core config
