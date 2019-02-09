@@ -29,6 +29,9 @@ module.exports = async (ctx) => {
       }
     }
   } catch (error) {
-    ctx.body = error
+    ctx.body = {
+      code: 0,
+      msg: JSON.stringify(error),
+    };
   }
 };

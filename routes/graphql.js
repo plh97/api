@@ -27,37 +27,44 @@ const cache = new Cache()
 
 
 const Graphql = async (ctx) => {
-  const query = ctx.request.body;
-  const queryFunc = async data => new Promise((resolve, reject) => {
-    console.log('是否相等')
-    console.log(cache.getCache(data))
-    console.log(data)
-    console.log(process.env.ACCESS_TOKEN)
-    const isExist = cache.getCache(data);
-    if(isExist){
-      console.log('get data from cache')
-      resolve(cache[data]);
-    } else {
-      console.log('get data from github')
-      axios({
-        url: 'https://api.github.com/graphql',
-        method: 'post',
-        headers: {
-          Authorization: `bearer ${process.env.ACCESS_TOKEN}`,
-          'Content-Type': 'application/json',
-        },
-        data,
-      })
-        .then( res => {
-          cache.addCache({
-            key: data,
-            val: res.data
+  try {
+    const query = ctx.request.body;
+    const queryFunc = async data => new Promise((resolve, reject) => {
+      console.log('是否相等')
+      console.log(cache.getCache(data))
+      console.log(data)
+      console.log(process.env.ACCESS_TOKEN)
+      const isExist = cache.getCache(data);
+      if(isExist){
+        console.log('get data from cache')
+        resolve(cache[data]);
+      } else {
+        console.log('get data from github')
+        axios({
+          url: 'https://api.github.com/graphql',
+          method: 'post',
+          headers: {
+            Authorization: `bearer ${process.env.ACCESS_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          data,
+        })
+          .then( res => {
+            cache.addCache({
+              key: data,
+              val: res.data
+            });
+            resolve(res.data);
           });
-          resolve(res.data);
-        });
-    }
-  });
-  ctx.body = await queryFunc(query);
+      }
+    });
+    ctx.body = await queryFunc(query);
+  } catch (error) {
+    ctx.body = {
+      code: 0,
+      msg: JSON.stringify(error),
+    };
+  }
 };
 
 module.exports = Graphql;

@@ -15,7 +15,6 @@ app
   // 跨域中间件
   .use(async (ctx,next) =>{
     ctx.set('Access-Control-Allow-Origin', '*');
-
     ctx.set('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, remember-me');
     await next()
   })
