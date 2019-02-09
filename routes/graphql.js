@@ -32,7 +32,7 @@ const Graphql = async (ctx) => {
     console.log('是否相等')
     console.log(cache.getCache(data))
     console.log(data)
-    console.log(process.env.access_token)
+    console.log(process.env.ACCESS_TOKEN)
     const isExist = cache.getCache(data);
     if(isExist){
       console.log('get data from cache')
@@ -43,7 +43,7 @@ const Graphql = async (ctx) => {
         url: 'https://api.github.com/graphql',
         method: 'post',
         headers: {
-          Authorization: `bearer ${process.env.access_token}`,
+          Authorization: `bearer ${process.env.ACCESS_TOKEN}`,
           'Content-Type': 'application/json',
         },
         data,
