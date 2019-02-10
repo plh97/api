@@ -1,9 +1,11 @@
-version: '3.6'
+version: '0.1'
 
 services:
   api:
     image: api:latest
     ports:
-      - 3001:80
+      - 3002:3001
     volumes:
       - ./:/root/app
+    # work:
+    #   - /root/app

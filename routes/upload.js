@@ -21,13 +21,13 @@ const Upload = async (ctx, next) => {
       const stream = await fs.createReadStream(image.path).pipe(toPath);
       const result = await new Promise((resolve) => {
         stream.on('finish', async () => {
+          tiny.key = "ZrWdVHSSaLkfP6OdxM1RzZxPDE5gcnsf";
+          const source = tiny.fromFile(`./public/images/${name}`);
+          source.toFile(`./public/images/_${name}`);
           resolve({
             name,
             url: url(name),
           });
-          tiny.key = "ZrWdVHSSaLkfP6OdxM1RzZxPDE5gcnsf";
-          const source = tiny.fromFile(`./public/images/${name}`);
-          source.toFile(`./public/images/${name}`);
         });
       });
       return result;
