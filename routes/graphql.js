@@ -1,45 +1,17 @@
 const axios = require('axios');
 
-class Cache {
-  constructor(){
-    this.cache = [];
-  }
-
-  getCache(key){
-    this.cache.find(e => e.key === key);
-  }
-
-  addCache({key,val}){
-    // 添加
-    const isExist = this.getCache(key);
-    if(isExist){
-      // 如果有数组，那就直接返回它，
-      return isExist
-    } else {
-      // 如果没有，那么push
-      this.cache.push({key,val});
-      return {key,val}
-    }
-  }
-}
-
-const cache = new Cache()
-
-
+// 缓存
+const cache = new Map()
 const Graphql = async (ctx) => {
   try {
     const query = ctx.request.body;
     const queryFunc = async data => new Promise((resolve, reject) => {
-      console.log('是否相等')
-      console.log(cache.getCache(data))
-      console.log(data)
       console.log(process.env.ACCESS_TOKEN)
-      const isExist = cache.getCache(data);
-      if(isExist){
-        console.log('get data from cache')
-        resolve(cache[data]);
+      if (cache.has((JSON.stringify(data)))) {
+        // console.log('get data from cache')
+        resolve(cache.get(JSON.stringify(data)));
       } else {
-        console.log('get data from github')
+        // console.log('get data from github')
         axios({
           url: 'https://api.github.com/graphql',
           method: 'post',
@@ -48,21 +20,19 @@ const Graphql = async (ctx) => {
             'Content-Type': 'application/json',
           },
           data,
+        }).then( res => {
+          cache.set(JSON.stringify(data),res.data);
+          resolve(res.data);
+        }).catch(error=>{
+          reject(error);
         })
-          .then( res => {
-            cache.addCache({
-              key: data,
-              val: res.data
-            });
-            resolve(res.data);
-          });
       }
     });
     ctx.body = await queryFunc(query);
   } catch (error) {
     ctx.body = {
-      code: 0,
-      msg: JSON.stringify(error),
+      code: error.response.status,
+      msg: error.response.statusText,
     };
   }
 };

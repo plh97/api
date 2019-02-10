@@ -1,7 +1,7 @@
 // package
 const Koa = require('koa');
 const http = require('http');
-const bodyParser = require('koa-body-parser');
+var bodyParser = require('koa-bodyparser');
 // local
 const allRouter = require('./routes/index.js');
 // application
