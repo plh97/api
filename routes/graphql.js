@@ -8,10 +8,10 @@ const Graphql = async (ctx) => {
     const queryFunc = async data => new Promise((resolve, reject) => {
       console.log(process.env.ACCESS_TOKEN)
       if (cache.has((JSON.stringify(data)))) {
-        // console.log('get data from cache')
+        console.log('get data from cache')
         resolve(cache.get(JSON.stringify(data)));
       } else {
-        // console.log('get data from github')
+        console.log('get data from github')
         axios({
           url: 'https://api.github.com/graphql',
           method: 'post',
