@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "n": "nodemon index.js --config nodemonrc.json",
+    "n": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,22 +24,13 @@
     "autoprefixer": "^9.3.1",
     "axios": "^0.18.0",
     "fs-extra": "^6.0.1",
-    "gulp-tiny": "^1.0.0",
-    "gulp-tinypng-compress": "^1.2.1",
-    "http": "^0.0.0",
-    "install": "^0.11.0",
     "koa": "^2.7.0",
-    "koa-body": "^2.5.0",
-    "koa-body-parser": "^1.1.2",
+    "koa-body": "^4.1.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "path": "^0.12.7",
     "postcss": "6.0.23",
     "precss": "^3.1.2",
     "tinify": "^1.6.0-beta.2"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-tinypng": "^1.0.2"
   }
 }

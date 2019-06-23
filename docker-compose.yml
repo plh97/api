@@ -1,4 +1,4 @@
-version: '0.1'
+version: '3.7'
 
 services:
   api:
@@ -6,6 +6,6 @@ services:
     ports:
       - 3002:3001
     volumes:
-      - ./:/root/app
+      - ./:/root/api
     # work:
-    #   - /root/app
+    #   - /root/api

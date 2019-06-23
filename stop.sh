@@ -1,1 +1,0 @@
-docker container stop $(docker ps -f "name=api" -q)

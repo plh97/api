@@ -1,20 +1,19 @@
-FROM node:latest
+FROM node
 
-COPY . ~/app
+COPY . /root/api
 
-WORKDIR /root/app
+WORKDIR /root/api
 
 ENV ACCESS_TOKEN=9c1b105d0bd2904a64a806f19b391d14be48233b
+
 ENV PORT=3001
 
 EXPOSE 3001
 
-WORKDIR /root/app
+# WORKDIR /root/api
 
-# CMD /bin/bash -c 'ls'
+RUN npm install yarn -g
 
-# RUN /bin/bash -c 'npm install'
+RUN yarn
 
-# RUN "npm" "install"
-
-# CMD [ "node" "index.js" ]
+CMD yarn run start
